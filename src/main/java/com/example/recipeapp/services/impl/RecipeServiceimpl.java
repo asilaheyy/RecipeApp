@@ -2,7 +2,6 @@ package com.example.recipeapp.services.impl;
 
 import com.example.recipeapp.model.Recipe;
 import com.example.recipeapp.services.RecipeService;
-import com.example.recipeapp.services.IngredientService;
 
 import java.util.Map;
 
@@ -31,5 +30,10 @@ public class RecipeServiceimpl implements RecipeService {
             recipesMap.put(recipe.getRecipeNum(), recipe);
         }
         return recipe;
+    }
+
+    @Override
+    public Map<Integer, Recipe> getAll() {
+        return recipesMap;
     }
 }

@@ -14,4 +14,5 @@ public interface IngredientService {
     Ingredients getIngredient(String ingredient);
 
     Map<Integer, Ingredients> ingredientsMap = new HashMap<>();
+    Map<Integer,Ingredients> getAll();
 }
