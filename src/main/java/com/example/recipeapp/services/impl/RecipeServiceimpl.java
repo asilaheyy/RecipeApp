@@ -14,23 +14,22 @@ public class RecipeServiceimpl implements RecipeService {
 
     @Override
     public Recipe getRecipeByNum(int recipeNum) {
-       for (Map.Entry<Integer,Recipe> recipes : recipesMap.entrySet()){
            if(recipesMap.containsKey(recipeNum)){
-               recipesMap.get(recipeNum);
+              return recipesMap.get(recipeNum);
            }
+           else {
+               throw new RuntimeException("Нет такого рецепта");
        }
-       return null;
-
     }
 
     @Override
     public Recipe addRecipe(Recipe recipe) {
-        Map<Integer, Recipe> newRecipe = (Map<Integer, Recipe>) recipesMap.put(counter++, recipe);
-        recipesMap.put(counter++,recipe);
-        if(newRecipe == null){
-            return null;
+        if(recipesMap.containsKey(recipe.getRecipeNum())){
+            throw new RuntimeException("Такой рецепт уже существует");
+        }
+        else {
+            recipesMap.put(recipe.getRecipeNum(), recipe);
         }
         return recipe;
-
     }
 }

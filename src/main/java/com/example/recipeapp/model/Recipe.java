@@ -11,11 +11,12 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class Recipe {
 
-    String recipeName;
-    int cookingTime;
-    Set ingredients = new HashSet<Ingredients>();
-    Set cookingSteps = new HashSet<String>();
+    private final String recipeName;
+    private final int recipeNum;
+    private int cookingTime;
+    private Set ingredients = new HashSet<Ingredients>();
+    private Set cookingSteps = new HashSet<String>();
 
-    Map<Integer, Recipe> recipesMap = new HashMap<>();
+    private Map<Integer, Recipe> recipesMap = new HashMap<>();
 
 }
