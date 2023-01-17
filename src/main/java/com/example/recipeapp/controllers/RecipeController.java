@@ -1,7 +1,8 @@
 package com.example.recipeapp.controllers;
 
 import com.example.recipeapp.model.Recipe;
-import com.example.recipeapp.services.RecipeService;
+import com.example.recipeapp.service.RecipeService;
+import com.example.recipeapp.service.RecipeService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

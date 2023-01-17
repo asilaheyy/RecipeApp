@@ -1,4 +1,4 @@
-package com.example.recipeapp.services;
+package com.example.recipeapp.service;
 
 import com.example.recipeapp.model.Ingredients;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,6 @@ import java.util.Map;
 public interface IngredientService {
 
     Ingredients addIngredient(Ingredients ingredient);
-
     Ingredients getIngredient(String ingredient);
 
     Map<Integer, Ingredients> ingredientsMap = new HashMap<>();

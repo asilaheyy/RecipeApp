@@ -9,8 +9,8 @@ import lombok.AllArgsConstructor;
 
 @Data
 @AllArgsConstructor
-public class Recipe {
 
+public class Recipe {
     private final String recipeName;
     private final int recipeNum;
     private int cookingTime;
@@ -18,5 +18,6 @@ public class Recipe {
     private Set cookingSteps = new HashSet<String>();
 
     private Map<Integer, Recipe> recipesMap = new HashMap<>();
+
 
 }
