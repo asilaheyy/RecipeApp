@@ -4,9 +4,7 @@ import com.example.recipeapp.model.Recipe;
 import com.example.recipeapp.service.RecipeService;
 import com.example.recipeapp.service.RecipeService;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -26,4 +24,12 @@ public class RecipeController {
     public Map<Integer, Recipe> getAll() {
         return this.recipeService.getAll();
     }
+
+    @PostMapping
+    public Recipe createRecipe(@RequestBody Recipe recipe){
+        return this.recipeService.addRecipe(recipe);
+    }
+
 }
+
+

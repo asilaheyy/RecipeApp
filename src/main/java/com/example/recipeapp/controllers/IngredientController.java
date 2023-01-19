@@ -2,9 +2,7 @@ package com.example.recipeapp.controllers;
 
 import com.example.recipeapp.model.Ingredients;
 import com.example.recipeapp.service.IngredientService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -22,5 +20,10 @@ public class IngredientController {
     @GetMapping
     Map<Integer, Ingredients> getAll(){
         return this.ingredientService.getAll();
+    }
+
+    @PostMapping
+    public Ingredients createIngredient(@RequestBody Ingredients ingredient){
+        return this.ingredientService.addIngredient(ingredient);
     }
 }
