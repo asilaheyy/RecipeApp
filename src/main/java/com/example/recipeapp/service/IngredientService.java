@@ -1,17 +1,22 @@
 package com.example.recipeapp.service;
 
 import com.example.recipeapp.model.Ingredients;
-import org.springframework.stereotype.Service;
+
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
-public interface IngredientService {
+
+public abstract interface IngredientService {
 
     Ingredients addIngredient(Ingredients ingredient);
-    Ingredients getIngredient(String ingredient);
+    Ingredients getIngredient(Ingredients ingredient);
 
-    Map<Integer, Ingredients> ingredientsMap = new HashMap<>();
-    Map<Integer,Ingredients> getAll();
+    Map<Ingredients, String> ingredientsMap = new HashMap<>();
+
+    boolean deleteIngredient(Ingredients ingredient);
+
+    Ingredients editIngredient(Ingredients ingredients, String measureUnit);
+
+    Map<Ingredients, String> getAll();
 }

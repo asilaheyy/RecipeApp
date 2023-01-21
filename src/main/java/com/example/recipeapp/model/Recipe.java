@@ -10,14 +10,15 @@ import lombok.AllArgsConstructor;
 @Data
 @AllArgsConstructor
 
-public class Recipe {
+public class Recipe  {
+
     private final String recipeName;
     private final int recipeNum;
-    private int cookingTime;
-    private Set ingredients = new HashSet<Ingredients>();
+    private String cookingTime;
+    private Set ingredients = new HashSet<Map<String, Ingredients>>();
     private Set cookingSteps = new HashSet<String>();
 
-    private Map<Integer, Recipe> recipesMap = new HashMap<>();
+
 
 
 }

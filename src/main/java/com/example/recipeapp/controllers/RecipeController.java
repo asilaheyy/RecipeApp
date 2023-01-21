@@ -4,6 +4,7 @@ import com.example.recipeapp.model.Recipe;
 import com.example.recipeapp.service.RecipeService;
 import com.example.recipeapp.service.RecipeService;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -26,8 +27,25 @@ public class RecipeController {
     }
 
     @PostMapping
-    public Recipe createRecipe(@RequestBody Recipe recipe){
+    public Recipe createRecipe(@RequestBody Recipe recipe) {
         return this.recipeService.addRecipe(recipe);
+    }
+
+    @DeleteMapping("/{recipeNum}")
+    public ResponseEntity<Void> deleteRecipeByNum(@PathVariable int recipeNum) {
+        if (recipeService.deleteRecipe(recipeNum)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/{recipeNum}")
+    public ResponseEntity<Recipe> editRecipeByNum(@PathVariable int recipeNum, @RequestBody Recipe recipe) {
+        Recipe newRecipe = recipeService.editRecipe(recipeNum, recipe);
+        if (recipe == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(newRecipe);
     }
 
 }

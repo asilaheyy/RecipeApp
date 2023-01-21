@@ -1,0 +1,41 @@
+###
+GET http://localhost:8080/recipe
+###
+POST  http://localhost:8080/recipe
+Content-Type: application/json
+
+{
+  "recipeName": "A",
+  "recipeNum": 1,
+  "cookingTime": "30 min",
+  "ingredients": "Bb",
+  "cookingSteps": "Cc"
+
+}
+
+###
+POST  http://localhost:8080/recipe
+Content-Type: application/json
+
+{
+  "recipeName": "Aa",
+  "recipeNum": 2,
+  "cookingTime": "40 min",
+  "ingredients": "Bb",
+  "cookingSteps": "Cc"
+
+}
+
+###
+POST  http://localhost:8080/recipe
+Content-Type: application/json
+
+{
+  "recipeName": "Aaa",
+  "recipeNum": 3,
+  "cookingTime": "20 min",
+  "ingredients": "Bb",
+  "cookingSteps": "Cc"
+
+}
+
