@@ -22,13 +22,25 @@ public class RecipeController {
     }
 
     @GetMapping
-    public Map<Integer, Recipe> getAll() {
-        return this.recipeService.getAll();
+    public ResponseEntity<Recipe> getAllRecipes() {
+        recipeService.getAll();
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{recipeNum}")
+    public ResponseEntity<Recipe> getRecipeByNum(int recipeNum) {
+        Recipe recipeByNum = recipeService.getRecipeByNum(recipeNum);
+        if (recipeByNum == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(recipeByNum);
+
     }
 
     @PostMapping
-    public Recipe createRecipe(@RequestBody Recipe recipe) {
-        return this.recipeService.addRecipe(recipe);
+    public ResponseEntity<Recipe> createRecipe(@RequestBody Recipe recipe) {
+        Recipe newRecipe = recipeService.createRecipe(recipe);
+        return ResponseEntity.ok().body(newRecipe);
     }
 
     @DeleteMapping("/{recipeNum}")

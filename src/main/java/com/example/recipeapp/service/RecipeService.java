@@ -10,7 +10,8 @@ import java.util.Map;
 public abstract interface RecipeService {
     Recipe getRecipeByNum(int recipeNum);
 
-    Recipe addRecipe(Recipe recipe);
+
+    Recipe createRecipe(Recipe recipe);
 
     boolean deleteRecipe(int recipeNum);
 

@@ -23,11 +23,12 @@ public class RecipeServiceimpl implements RecipeService {
     }
 
     @Override
-    public Recipe addRecipe(Recipe recipe) {
+    public Recipe createRecipe(Recipe recipe) {
         if (recipesMap.containsKey(recipe.getRecipeNum())) {
             return null;
         } else {
             recipesMap.put(recipe.getRecipeNum(), recipe);
+            counter++;
         }
         return recipe;
     }

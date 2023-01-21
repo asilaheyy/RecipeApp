@@ -19,13 +19,25 @@ public class IngredientController {
     }
 
     @GetMapping
-    Map<Ingredients, String> getAll() {
-        return this.ingredientService.getAll();
+    public ResponseEntity<Ingredients> getAll() {
+        ingredientService.getAll();
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{ingredient}")
+    public ResponseEntity<Ingredients> getIngredient(@PathVariable Ingredients ingredient){
+        Ingredients neededIngredient = ingredientService.getIngredient(ingredient);
+        if (neededIngredient == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok( neededIngredient);
+
     }
 
     @PostMapping
-    public Ingredients createIngredient(@RequestBody Ingredients ingredient) {
-        return this.ingredientService.addIngredient(ingredient);
+    public ResponseEntity<Ingredients> createIngredient(@RequestBody Ingredients ingredient) {
+        Ingredients newIngredient = ingredientService.addIngredient(ingredient);
+        return ResponseEntity.ok().body(newIngredient);
     }
 
     @DeleteMapping("/{ingredient}")
@@ -37,8 +49,8 @@ public class IngredientController {
     }
 
     @PutMapping("/{ingredient}")
-    public ResponseEntity<Ingredients> editIngredientMeasureUnit(@PathVariable Ingredients ingredient, @RequestBody Ingredients ingredients) {
-        Ingredients newIngredient = ingredientService.editIngredient(ingredient, ingredients.getMeasureUnit());
+    public ResponseEntity<Ingredients> editIngredient(@PathVariable Ingredients ingredient, @PathVariable String measureUnit, @RequestBody Ingredients ingredients) {
+        Ingredients newIngredient = ingredientService.editIngredient(ingredient, measureUnit);
         if (ingredient == null) {
             return ResponseEntity.notFound().build();
         }
