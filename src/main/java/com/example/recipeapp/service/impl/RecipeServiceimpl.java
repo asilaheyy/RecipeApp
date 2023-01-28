@@ -45,7 +45,7 @@ public class RecipeServiceimpl implements RecipeService {
     }
 
     @Override
-    public Recipe editRecipe(int recipeNum, Recipe recipes) {
+    public Recipe editRecipe(int recipeNum, Recipe recipeName) {
         for (Recipe recipe : recipesMap.values()) {
             if (recipesMap.containsKey(recipeNum)) {
                 recipesMap.put(recipeNum, recipe);

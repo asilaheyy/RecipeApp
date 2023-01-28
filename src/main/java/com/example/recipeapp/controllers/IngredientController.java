@@ -1,15 +1,27 @@
 package com.example.recipeapp.controllers;
 
 import com.example.recipeapp.model.Ingredients;
+import com.example.recipeapp.model.Recipe;
 import com.example.recipeapp.service.IngredientService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 
-@RestController("/ingredients")
-@RequestMapping
+@RestController
+
+@RequestMapping("/ingredients")
+@Tag(name = "Ингредиенты", description = "CRUD-операции и др. эндпоинты для работы с ингредиентами")
 public class IngredientController {
 
     private final IngredientService ingredientService;
@@ -19,12 +31,52 @@ public class IngredientController {
     }
 
     @GetMapping
-    public ResponseEntity<Ingredients> getAll() {
-        ingredientService.getAll();
-        return ResponseEntity.ok().build();
+    @Operation(
+            summary = "Поиск ингредиентов по названию",
+            description = "Можно искать по параметру или без"
+    )
+    @Parameters( value = {
+            @Parameter(name = "ingredient", example = "Морковь")
+    })
+    @ApiResponses( value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Ингредиент найден",
+                    content = {
+                            @Content(
+                                  mediaType = "application/json" ,
+                                    array = @ArraySchema(schema = @Schema(implementation = Ingredients.class))
+                            )
+
+                    }
+            )
+    })
+    public ResponseEntity<Ingredients> getAll(@RequestParam(required = false) Ingredients ingredient){
+        return null;
+
     }
 
     @GetMapping("/{ingredient}")
+    @Operation(
+            summary = "Поиск ингредиента",
+            description = "Нужно искать по названию"
+    )
+    @Parameters( value = {
+            @Parameter(name = "ingredient", example = "Морковь")
+    })
+    @ApiResponses( value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Ингредиент найден",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json" ,
+                                    array = @ArraySchema(schema = @Schema(implementation = Ingredients.class))
+                            )
+
+                    }
+            )
+    })
     public ResponseEntity<Ingredients> getIngredient(@PathVariable Ingredients ingredient){
         Ingredients neededIngredient = ingredientService.getIngredient(ingredient);
         if (neededIngredient == null){
@@ -35,12 +87,52 @@ public class IngredientController {
     }
 
     @PostMapping
+    @Operation(
+            summary = "Создание ингредиента"
+    )
+    @Parameters( value = {
+            @Parameter(name = "ingredientName", example = "Морковь"),
+            @Parameter(name = "measureUnit", example = "2 шт")
+    })
+    @ApiResponses( value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Ингредиент создан",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json" ,
+                                    array = @ArraySchema(schema = @Schema(implementation = Ingredients.class))
+                            )
+
+                    }
+            )
+    })
     public ResponseEntity<Ingredients> createIngredient(@RequestBody Ingredients ingredient) {
         Ingredients newIngredient = ingredientService.addIngredient(ingredient);
         return ResponseEntity.ok().body(newIngredient);
     }
 
     @DeleteMapping("/{ingredient}")
+    @Operation(
+            summary = "Удаление ингредиента",
+            description = "Нужно искать по названию"
+    )
+    @Parameters( value = {
+            @Parameter(name = "ingredient", example = "Морковь")
+    })
+    @ApiResponses( value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Ингредиент удален",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json" ,
+                                    array = @ArraySchema(schema = @Schema(implementation = Ingredients.class))
+                            )
+
+                    }
+            )
+    })
     public ResponseEntity<Void> deleteIngredient(@PathVariable Ingredients ingredient) {
         if (ingredientService.deleteIngredient(ingredient)) {
             return ResponseEntity.ok().build();
@@ -49,6 +141,26 @@ public class IngredientController {
     }
 
     @PutMapping("/{ingredient}")
+    @Operation(
+            summary = "Редактирование ингредиента",
+            description = "Нужно искать по насванию ингредиента"
+    )
+    @Parameters( value = {
+            @Parameter(name = "ingredient", example = "Морковь")
+    })
+    @ApiResponses( value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Ингредиент найден",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json" ,
+                                    array = @ArraySchema(schema = @Schema(implementation = Ingredients.class))
+                            )
+
+                    }
+            )
+    })
     public ResponseEntity<Ingredients> editIngredient(@PathVariable Ingredients ingredient, @PathVariable String measureUnit, @RequestBody Ingredients ingredients) {
         Ingredients newIngredient = ingredientService.editIngredient(ingredient, measureUnit);
         if (ingredient == null) {

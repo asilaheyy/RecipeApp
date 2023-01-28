@@ -15,7 +15,7 @@ public abstract interface RecipeService {
 
     boolean deleteRecipe(int recipeNum);
 
-    Recipe editRecipe(int recipeNum, Recipe recipe);
+    Recipe editRecipe(int recipeNum, Recipe recipeName);
 
     Map<Integer, Recipe> getAll();
 

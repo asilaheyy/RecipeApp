@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 public class Ingredients {
 
     private final Ingredients ingredient;
-    private int ingredientCount;
     private String measureUnit;
 
 }
