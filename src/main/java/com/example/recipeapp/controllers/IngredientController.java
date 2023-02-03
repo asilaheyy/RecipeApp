@@ -15,11 +15,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
 
 
 @RestController
-
 @RequestMapping("/ingredients")
 @Tag(name = "Ингредиенты", description = "CRUD-операции и др. эндпоинты для работы с ингредиентами")
 public class IngredientController {

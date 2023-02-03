@@ -19,4 +19,5 @@ public abstract interface IngredientService {
     Ingredients editIngredient(Ingredients ingredients, String measureUnit);
 
     Map<Ingredients, String> getAll();
+
 }

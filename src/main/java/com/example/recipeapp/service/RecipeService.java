@@ -1,10 +1,12 @@
 package com.example.recipeapp.service;
 
 import com.example.recipeapp.model.Recipe;
+import com.sun.source.tree.Tree;
 
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 
 public abstract interface RecipeService {
@@ -17,7 +19,7 @@ public abstract interface RecipeService {
 
     Recipe editRecipe(int recipeNum, Recipe recipeName);
 
-    Map<Integer, Recipe> getAll();
+    TreeMap<Integer, Recipe> getAll();
 
-    Map<Integer, Recipe> recipesMap = new HashMap<>();
+    TreeMap<Integer, Recipe> recipesMap = new TreeMap<>();
 }
