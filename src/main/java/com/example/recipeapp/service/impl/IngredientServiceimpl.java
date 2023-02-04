@@ -16,7 +16,7 @@ public class IngredientServiceimpl implements IngredientService {
 
     final private FileServiceIngredient fileServiceIngredient;
 
-    private static TreeMap<Ingredients, String> ingredientsMap = new TreeMap<>();
+    private static TreeMap<String, String> ingredientsMap = new TreeMap<String, String>();
 
     public IngredientServiceimpl(FileServiceIngredient fileServiceIngredient) {
         this.fileServiceIngredient = fileServiceIngredient;
@@ -24,17 +24,17 @@ public class IngredientServiceimpl implements IngredientService {
 
 
     @PostConstruct
-    private void initIngredient(){
-        readFromFileIngredient();
+    private void initIng(){
+        readFromFileIng();
     }
 
     @Override
-    public Ingredients addIngredient(Ingredients ingredient) {
+    public String addIngredient(String ingredient, String measureUnit) {
         if (ingredientsMap.containsKey(ingredient)) {
             return null;
         } else {
-            ingredientsMap.put(ingredient, ingredient.getMeasureUnit());
-            saveToFileIngredient();
+            ingredientsMap.put(ingredient, measureUnit);
+            saveToFileIng();
         }
         return ingredient;
     }
@@ -50,7 +50,7 @@ public class IngredientServiceimpl implements IngredientService {
 
     @Override
     public boolean deleteIngredient(Ingredients ingredients) {
-        for (Ingredients ingredient : ingredientsMap.keySet()) {
+        for (String ingredient : ingredientsMap.keySet()) {
             if (ingredientsMap.containsKey(ingredient)) {
                 ingredientsMap.remove(ingredient);
                 return true;
@@ -60,11 +60,11 @@ public class IngredientServiceimpl implements IngredientService {
     }
 
     @Override
-    public Ingredients editIngredient(Ingredients ingredients, String measureUnit) {
-        for (Ingredients ingredient : ingredientsMap.keySet()) {
+    public String editIngredient(Ingredients ingredients, String measureUnit) {
+        for (String ingredient : ingredientsMap.keySet()) {
             if (ingredientsMap.containsKey(ingredient)) {
                 ingredientsMap.put(ingredient, measureUnit);
-                saveToFileIngredient();
+                saveToFileIng();
                 return ingredient;
             }
         }
@@ -72,23 +72,23 @@ public class IngredientServiceimpl implements IngredientService {
     }
 
     @Override
-    public TreeMap<Ingredients, String> getAll() {
+    public TreeMap<String, String> getAll() {
         return ingredientsMap;
     }
 
-    private void saveToFileIngredient(){
+    private void saveToFileIng(){
         try {
             String json = new ObjectMapper().writeValueAsString(ingredientsMap);
-            fileServiceIngredient.saveToFileIngredient(json);
+            fileServiceIngredient.saveToFileIng(json);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void readFromFileIngredient(){
-        String json = fileServiceIngredient.readFromFileIngredient();
+    private void readFromFileIng(){
+        String json = fileServiceIngredient.readFromFileIng();
         try {
-            ingredientsMap = new ObjectMapper().readValue(json, new TypeReference<TreeMap<Ingredients, String>>() {
+            ingredientsMap = new ObjectMapper().readValue(json, new TypeReference<TreeMap<String, String>>() {
             });
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);

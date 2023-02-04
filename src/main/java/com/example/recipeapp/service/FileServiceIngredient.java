@@ -1,8 +1,12 @@
 package com.example.recipeapp.service;
 
+import java.io.File;
+
 public interface FileServiceIngredient {
 
-    boolean saveToFileIngredient(String json);
+    boolean saveToFileIng(String json);
 
-    String readFromFileIngredient();
+    String readFromFileIng();
+    File getDataFileIng();
+    boolean cleanDataFileIng();
 }

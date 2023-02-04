@@ -9,15 +9,17 @@ import java.util.Map;
 
 public abstract interface IngredientService {
 
-    Ingredients addIngredient(Ingredients ingredient);
+
+    String addIngredient(String ingredient, String measureUnit);
+
     Ingredients getIngredient(Ingredients ingredient);
 
-    Map<Ingredients, String> ingredientsMap = new HashMap<>();
+    Map<String, String> ingredientsMap = new HashMap<>();
 
     boolean deleteIngredient(Ingredients ingredient);
 
-    Ingredients editIngredient(Ingredients ingredients, String measureUnit);
+    String editIngredient(Ingredients ingredients, String measureUnit);
 
-    Map<Ingredients, String> getAll();
+    Map<String, String> getAll();
 
 }

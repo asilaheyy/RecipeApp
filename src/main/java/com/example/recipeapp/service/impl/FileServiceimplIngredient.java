@@ -4,26 +4,28 @@ import com.example.recipeapp.service.FileServiceIngredient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+
 @Service
 public class FileServiceimplIngredient implements FileServiceIngredient {
 
-    @Value("${path.to.data.file}")
-    private String dataFilePathIng;
+    @Value("${path.to.ingredient.data.file}")
+    private String ingDataFilePath;
 
-    @Value("${name.of.data.file}")
-    private String dataFileNameIng;
+    @Value("${name.of.ingredient.data.file}")
+    private String ingDataFileName;
 
 
 
     @Override
-    public boolean saveToFileIngredient(String json) {
+    public boolean saveToFileIng(String json) {
         try {
-            cleanDataFileIngredient();
-            Files.writeString(Path.of(dataFilePathIng, dataFileNameIng),json);
+            cleanDataFileIng();
+            Files.writeString(Path.of(ingDataFilePath, ingDataFileName),json);
             return true;
         } catch (IOException e) {
             return false;
@@ -31,17 +33,23 @@ public class FileServiceimplIngredient implements FileServiceIngredient {
     }
 
     @Override
-    public String readFromFileIngredient() {
+    public String readFromFileIng() {
         try {
-            return Files.readString(Path.of(dataFilePathIng, dataFileNameIng));
+            return Files.readString(Path.of(ingDataFilePath, ingDataFileName));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private boolean cleanDataFileIngredient() {
+    @Override
+    public File getDataFileIng(){
+        return new File(ingDataFilePath+"/"+ingDataFileName);
+    }
+
+    @Override
+    public boolean cleanDataFileIng() {
         try {
-            Path path = Path.of(dataFilePathIng, dataFileNameIng);
+            Path path = Path.of(ingDataFilePath, ingDataFileName);
             Files.deleteIfExists(path);
             Files.createFile(path);
             return true;
@@ -50,5 +58,5 @@ public class FileServiceimplIngredient implements FileServiceIngredient {
             return false;
         }
     }
-}
 
+}

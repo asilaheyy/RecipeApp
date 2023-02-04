@@ -9,9 +9,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.time.Month;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.TreeMap;
 
 @Service
@@ -19,7 +16,7 @@ public class RecipeServiceimpl implements RecipeService {
 
     final private FileService fileService;
 
-    private static TreeMap<Integer, Recipe> recipesMap = new TreeMap<>();
+    private static TreeMap<Integer, Recipe> recipesMap = new TreeMap<Integer, Recipe>();
 
     int counter = 0;
 
@@ -68,7 +65,7 @@ public class RecipeServiceimpl implements RecipeService {
     public Recipe editRecipe(int recipeNum, Recipe recipeName) {
         for (Recipe recipe : recipesMap.values()) {
             if (recipesMap.containsKey(recipeNum)) {
-                recipesMap.put(recipeNum, recipe);
+                recipesMap.put(recipeNum, recipeName);
                 saveToFile();
                 return recipe;
             }

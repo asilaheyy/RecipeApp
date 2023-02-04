@@ -105,8 +105,8 @@ public class IngredientController {
                     }
             )
     })
-    public ResponseEntity<Ingredients> createIngredient(@RequestBody Ingredients ingredient) {
-        Ingredients newIngredient = ingredientService.addIngredient(ingredient);
+    public ResponseEntity<String> createIngredient(@RequestBody String ingredient, String measureUnit) {
+        String newIngredient = ingredientService.addIngredient(ingredient,measureUnit);
         return ResponseEntity.ok().body(newIngredient);
     }
 
@@ -159,8 +159,8 @@ public class IngredientController {
                     }
             )
     })
-    public ResponseEntity<Ingredients> editIngredient(@PathVariable Ingredients ingredient, @PathVariable String measureUnit, @RequestBody Ingredients ingredients) {
-        Ingredients newIngredient = ingredientService.editIngredient(ingredient, measureUnit);
+    public ResponseEntity<String> editIngredient(@PathVariable Ingredients ingredient, @PathVariable String measureUnit, @RequestBody Ingredients ingredients) {
+        String newIngredient = ingredientService.editIngredient(ingredient, measureUnit);
         if (ingredient == null) {
             return ResponseEntity.notFound().build();
         }
