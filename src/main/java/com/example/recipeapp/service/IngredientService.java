@@ -18,7 +18,7 @@ public abstract interface IngredientService {
 
     boolean deleteIngredient(Ingredients ingredient);
 
-    String editIngredient(Ingredients ingredients, String measureUnit);
+    String editIngredient(String ingredient, String measureUnit);
 
     Map<String, String> getAll();
 

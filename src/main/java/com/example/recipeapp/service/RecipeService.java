@@ -12,6 +12,7 @@ public abstract interface RecipeService {
 
     Recipe createRecipe(Recipe recipe);
 
+
     boolean deleteRecipe(int recipeNum);
 
     Recipe editRecipe(int recipeNum, Recipe recipeName);

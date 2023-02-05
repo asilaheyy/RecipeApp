@@ -159,7 +159,7 @@ public class IngredientController {
                     }
             )
     })
-    public ResponseEntity<String> editIngredient(@PathVariable Ingredients ingredient, @PathVariable String measureUnit, @RequestBody Ingredients ingredients) {
+    public ResponseEntity<String> editIngredient(@PathVariable String ingredient, @PathVariable String measureUnit, @RequestBody Ingredients ingredients) {
         String newIngredient = ingredientService.editIngredient(ingredient, measureUnit);
         if (ingredient == null) {
             return ResponseEntity.notFound().build();

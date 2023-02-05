@@ -52,24 +52,19 @@ public class RecipeServiceimpl implements RecipeService {
 
     @Override
     public boolean deleteRecipe(int recipeNum) {
-        for (Recipe recipes : recipesMap.values()) {
             if (recipesMap.containsKey(recipeNum)) {
                 recipesMap.remove(recipeNum);
-                return true;
+                saveToFile();
             }
-        }
         return false;
     }
 
     @Override
     public Recipe editRecipe(int recipeNum, Recipe recipeName) {
-        for (Recipe recipe : recipesMap.values()) {
             if (recipesMap.containsKey(recipeNum)) {
                 recipesMap.put(recipeNum, recipeName);
                 saveToFile();
-                return recipe;
             }
-        }
         return null;
     }
 

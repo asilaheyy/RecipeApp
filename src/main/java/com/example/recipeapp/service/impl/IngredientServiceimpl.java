@@ -49,25 +49,20 @@ public class IngredientServiceimpl implements IngredientService {
     }
 
     @Override
-    public boolean deleteIngredient(Ingredients ingredients) {
-        for (String ingredient : ingredientsMap.keySet()) {
+    public boolean deleteIngredient(Ingredients ingredient) {
             if (ingredientsMap.containsKey(ingredient)) {
                 ingredientsMap.remove(ingredient);
-                return true;
+                saveToFileIng();
             }
-        }
         return false;
     }
 
     @Override
-    public String editIngredient(Ingredients ingredients, String measureUnit) {
-        for (String ingredient : ingredientsMap.keySet()) {
+    public String editIngredient(String ingredient, String measureUnit) {
             if (ingredientsMap.containsKey(ingredient)) {
                 ingredientsMap.put(ingredient, measureUnit);
                 saveToFileIng();
-                return ingredient;
             }
-        }
         return null;
     }
 
