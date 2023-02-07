@@ -14,9 +14,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 
 
@@ -37,16 +41,16 @@ public class RecipeController {
             summary = "Поиск рецептов по названию или номеру",
             description = "Можно искать по названию и/или номеру рецепта или без параметров"
     )
-    @Parameters( value = {
+    @Parameters(value = {
             @Parameter(name = "recipe", example = "Сырники")
     })
-    @ApiResponses( value = {
+    @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
                     description = "Рецепт найден",
                     content = {
                             @Content(
-                                    mediaType = "application/json" ,
+                                    mediaType = "application/json",
                                     array = @ArraySchema(schema = @Schema(implementation = Recipe.class))
                             )
 
@@ -63,16 +67,16 @@ public class RecipeController {
             summary = "Поиск рецептов по номеру",
             description = "Можно искать по номеру рецепта"
     )
-    @Parameters( value = {
+    @Parameters(value = {
             @Parameter(name = "recipeNum", example = "3")
     })
-    @ApiResponses( value = {
+    @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
                     description = "Рецепт найден",
                     content = {
                             @Content(
-                                    mediaType = "application/json" ,
+                                    mediaType = "application/json",
                                     array = @ArraySchema(schema = @Schema(implementation = Recipe.class))
                             )
 
@@ -93,20 +97,20 @@ public class RecipeController {
     @Operation(
             summary = "Создание рецепта"
     )
-    @Parameters( value = {
+    @Parameters(value = {
             @Parameter(name = "recipeName", example = "Сырники"),
             @Parameter(name = "recipeNum", example = "2"),
             @Parameter(name = "cookingTime", example = "30 минут"),
             @Parameter(name = "ingredients", example = "Творог 200г, яйцо 3 шт, сахар по вкусу"),
             @Parameter(name = "cookingSteps", example = "Перемешать все ингредиенты до однородной массы")
     })
-    @ApiResponses( value = {
+    @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
                     description = "Рецепт создан",
                     content = {
                             @Content(
-                                    mediaType = "application/json" ,
+                                    mediaType = "application/json",
                                     array = @ArraySchema(schema = @Schema(implementation = Recipe.class))
                             )
 
@@ -118,21 +122,33 @@ public class RecipeController {
         return ResponseEntity.ok().body(newRecipe);
     }
 
+    @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Object> addRecipesFromFile(@RequestParam MultipartFile file) {
+        try (InputStream stream = file.getInputStream()) {
+            recipeService.addRecipesFromInputStream(stream);
+            return ResponseEntity.ok().build();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body(e.toString());
+        }
+    }
+
+
     @DeleteMapping("/{recipeNum}")
     @Operation(
             summary = "Удаление рецепта по номеру",
             description = "Нужно искать по номеру рецепта"
     )
-    @Parameters( value = {
+    @Parameters(value = {
             @Parameter(name = "recipeNum", example = "3")
     })
-    @ApiResponses( value = {
+    @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
                     description = "Рецепт удален",
                     content = {
                             @Content(
-                                    mediaType = "application/json" ,
+                                    mediaType = "application/json",
                                     array = @ArraySchema(schema = @Schema(implementation = Recipe.class))
                             )
 
@@ -152,16 +168,16 @@ public class RecipeController {
             summary = "Редактирование рецепта по номеру",
             description = "Нужно искать по номеру рецепта"
     )
-    @Parameters( value = {
+    @Parameters(value = {
             @Parameter(name = "recipeNum", example = "3")
     })
-    @ApiResponses( value = {
+    @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
                     description = "Рецепт найден",
                     content = {
                             @Content(
-                                    mediaType = "application/json" ,
+                                    mediaType = "application/json",
                                     array = @ArraySchema(schema = @Schema(implementation = Recipe.class))
                             )
 

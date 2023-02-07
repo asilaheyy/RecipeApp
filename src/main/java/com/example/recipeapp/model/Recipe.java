@@ -20,6 +20,4 @@ public class Recipe  {
     private Set cookingSteps = new HashSet<String>();
 
 
-
-
 }

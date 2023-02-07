@@ -35,8 +35,8 @@ public class IngredientServiceimpl implements IngredientService {
         } else {
             ingredientsMap.put(ingredient, measureUnit);
             saveToFileIng();
+            return ingredient;
         }
-        return ingredient;
     }
 
     @Override
@@ -53,6 +53,7 @@ public class IngredientServiceimpl implements IngredientService {
             if (ingredientsMap.containsKey(ingredient)) {
                 ingredientsMap.remove(ingredient);
                 saveToFileIng();
+                return true;
             }
         return false;
     }
@@ -62,6 +63,7 @@ public class IngredientServiceimpl implements IngredientService {
             if (ingredientsMap.containsKey(ingredient)) {
                 ingredientsMap.put(ingredient, measureUnit);
                 saveToFileIng();
+                return ingredient;
             }
         return null;
     }
