@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -125,7 +126,7 @@ public class RecipeController {
     @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Object> addRecipesFromFile(@RequestParam MultipartFile file) {
         try (InputStream stream = file.getInputStream()) {
-            recipeService.addRecipesFromInputStream(stream);
+            recipeService.addRecipesFromInputStream(file);
             return ResponseEntity.ok().build();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,6 +1,8 @@
 package com.example.recipeapp.service;
 
 import com.example.recipeapp.model.Recipe;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.IOException;
@@ -12,7 +14,7 @@ public abstract interface RecipeService {
     Recipe getRecipeByNum(int recipeNum);
 
 
-    void addRecipesFromInputStream(InputStream inputStream) throws IOException;
+    void addRecipesFromInputStream(MultipartFile file) throws IOException;
 
     Recipe createRecipe(Recipe recipe);
 
@@ -25,4 +27,8 @@ public abstract interface RecipeService {
     TreeMap<Integer, Recipe> getAll();
 
     TreeMap<Integer, Recipe> recipesMap = new TreeMap<>();
+
+    ObjectMapper objectMapper = new ObjectMapper();
 }
+
+
