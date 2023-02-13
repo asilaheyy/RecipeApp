@@ -17,7 +17,7 @@ public class Recipe  {
     private String cookingTime;
     private Set ingredients = new HashSet<Map<String, Ingredients>>();
     private Set cookingSteps = new HashSet<String>();
-    ObjectMapper objectMapper;
+
 
 
 
