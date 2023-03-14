@@ -1,13 +1,14 @@
 package com.example.recipeapp.model;
 import lombok.Data;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-
+@NoArgsConstructor
 public class Ingredients {
 
-    private final String ingredient;
-    private int ingredientCount;
+    private String ingredientName;
     private String measureUnit;
+
 }
